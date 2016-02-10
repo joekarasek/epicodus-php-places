@@ -8,10 +8,6 @@
 
     <div class="container">
         <h1 class="header">Places you've been to:</h1>
-        <!-- message -->
-
-        {% include 'message.html.twig'%}
-
         {% for place in places %}
             <div class="well">
                 <h2>{{ place.getCity }}</h2>
@@ -19,10 +15,12 @@
                 <h3>Visited in {{ place.getYear}}</h3>
                 <img src="{{ place.getImage }}">
                 <form action="/delete_one" method="post">
-                    <button class="btn" name='delete_one' value='{{ place.getCity }}'>Delete this place!</button>
+                    <button class="btn btn-warning" name='delete_one' value='{{ place.getCity }}'>Delete this place!</button>
                 </form>
             </div>
         {% endfor %}
+
+        {% include 'message.html.twig'%}
 
         {% if form %}
             {% include 'form.html.twig' %}
@@ -30,14 +28,17 @@
 
         {% if not form %}
             <form action="/show_form">
-                <button class="btn">Add a Place!</button>
+                <button class="btn btn-default">Add a Place!</button>
             </form>
         {% endif %}
+
         <br>
 
-        <form action="/delete_all" method='post'>
-            <button class="btn" type="submit">Delete All</button>
-        </form>
+        {% if places %}
+            <form action="/delete_all" method='post'>
+                <button class="btn btn-danger" type="submit">Delete All</button>
+            </form>
+        {% endif %}
 
     </div>
     </body>

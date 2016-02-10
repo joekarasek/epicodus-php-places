@@ -39,7 +39,7 @@
             'places' => Place::getAll(),
             'message' => array(
                 "text" => "Time to book a trip!",
-                'type' => 'danger'
+                'type' => 'info'
             )
         ));
 
