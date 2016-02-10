@@ -59,7 +59,11 @@
         $place_to_delete->delete();
 
         return $app['twig']->render('home.html.twig', array(
-            'places' => Place::getAll()
+            'places' => Place::getAll(),
+            'message' => array(
+                "text" => $name_of_place . " was deleted!",
+                'type' => 'danger'
+            )
             ));
     });
 
