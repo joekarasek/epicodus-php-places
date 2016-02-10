@@ -14,7 +14,7 @@
 
     $app->get("/", function() use ($app) {
         return $app['twig']->render('home.html.twig', array(
-
+            'places' => Place::getAll()
         ));
     });
 
@@ -26,6 +26,15 @@
         return $app['twig']->render('home.html.twig', array(
             'places' => Place::getAll()
         ));
+    });
+
+    $app->post('/delete_all', function() use ($app) {
+
+        Place::deleteAll();
+        return $app['twig']->render('home.html.twig', array(
+            'places' => Place::getAll()
+        ));
+
     });
 
     return $app;
