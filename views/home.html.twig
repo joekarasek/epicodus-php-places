@@ -10,12 +10,17 @@
         <h1 class="header">Places you've been to:</h1>
         <!-- message -->
 
+        {% include 'message.html.twig'%}
+
         {% for place in places %}
             <div class="well">
                 <h2>{{ place.getCity }}</h2>
                 <h3>{{ place.getCountry }}</h3>
                 <h3>Visited in {{ place.getYear}}</h3>
                 <img src="{{ place.getImage }}">
+                <form action="/delete_one" method="post">
+                    <button class="btn" name='delete_one' value='{{ place.getCity }}'>Delete this place!</button>
+                </form>
             </div>
         {% endfor %}
 

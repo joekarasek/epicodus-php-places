@@ -44,6 +44,12 @@ class Place
         array_push($_SESSION['list_of_places'], $this);
     }
 
+    function delete()
+    {
+        $key_to_splice = array_search($this, $_SESSION['list_of_places']);
+        unset($_SESSION['list_of_places'][$key_to_splice]);
+    }
+
     static function getAll()
     {
         return $_SESSION['list_of_places'];

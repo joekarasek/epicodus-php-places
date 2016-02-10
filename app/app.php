@@ -24,7 +24,11 @@
         $place->save();
 
         return $app['twig']->render('home.html.twig', array(
-            'places' => Place::getAll()
+            'places' => Place::getAll(),
+            'message' => array(
+                "text" => "Sounds like a fun trip!",
+                'type' => 'info'
+            )
         ));
     });
 
@@ -32,9 +36,31 @@
 
         Place::deleteAll();
         return $app['twig']->render('home.html.twig', array(
-            'places' => Place::getAll()
+            'places' => Place::getAll(),
+            'message' => array(
+                "text" => "Time to book a trip!",
+                'type' => 'danger'
+            )
         ));
 
+    });
+
+    $app->post('/delete_one', function() use ($app) {
+        $name_of_place = $_POST['delete_one'];
+        $found = false;
+        foreach($_SESSION['list_of_places'] as $key => $place) {
+            if ($place->getCity() == $name_of_place) {
+                $found = true;
+                $key_to_delete = $key;
+                break;
+            }
+        }
+        $place_to_delete = $_SESSION['list_of_places'][$key];
+        $place_to_delete->delete();
+
+        return $app['twig']->render('home.html.twig', array(
+            'places' => Place::getAll()
+            ));
     });
 
     return $app;
