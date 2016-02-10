@@ -6,7 +6,7 @@ class Place
     private $image_src;
     private $year_visited;
 
-    function __construct($city, $country, $image_src, $year_visited)
+    function __construct($city, $country, $year_visited, $image_src)
     {
         $this->city = $city;
         $this->country = $country;
@@ -39,7 +39,15 @@ class Place
         return $this->year_visited;
     }
 
+    function save()
+    {
+        array_push($_SESSION['list_of_places'], $this);
+    }
 
+    static function getAll()
+    {
+        return $_SESSION['list_of_places'];
+    }
 
 
 

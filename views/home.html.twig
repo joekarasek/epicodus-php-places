@@ -9,6 +9,15 @@
         <h1 class="header">Places you've been to:</h1>
         <!-- message -->
 
+        {% for place in places %}
+            <div class="well">
+                <h2>{{ place.getCity }}</h2>
+                <h3>{{ place.getCountry }}</h3>
+                <h3>Visited in {{ place.getYear}}</h3>
+                <img src="{{ place.getImage }}">
+            </div>
+        {% endfor %}
+
         <form action="/add_place" method="post">
             <h2>Enter info for a place you visited</h2>
             <div class="form-group">
