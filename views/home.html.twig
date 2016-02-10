@@ -24,26 +24,16 @@
             </div>
         {% endfor %}
 
-        <form action="/add_place" method="post">
-            <h2>Enter info for a place you visited</h2>
-            <div class="form-group">
-                <label for="city">City:</label>
-                <input type="text" class="form-control" name="city" id="city">
-            </div>
-            <div class="form-group">
-                <label for="country">Country:</label>
-                <input type="text" class="form-control" name="country" id="country">
-            </div>
-            <div class="form-group">
-                <label for="year">Year visited:</label>
-                <input type="text" class="form-control" name="year" id="year">
-            </div>
-            <div class="form-group">
-                <label for="image_src">Image url:</label>
-                <input type="text" class="form-control" name="image_src" id="image_src">
-            </div>
-            <button class="btn" type="submit">Submit</button>
-        </form>
+        {% if form %}
+            {% include 'form.html.twig' %}
+        {% endif %}
+
+        {% if not form %}
+            <form action="/show_form">
+                <button class="btn">Add a Place!</button>
+            </form>
+        {% endif %}
+        <br>
 
         <form action="/delete_all" method='post'>
             <button class="btn" type="submit">Delete All</button>

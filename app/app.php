@@ -67,5 +67,13 @@
             ));
     });
 
+    $app->get('/show_form', function() use ($app) {
+
+        return $app['twig']->render('home.html.twig', array(
+            'places' => Place::getAll(),
+            'form' => true
+            ));
+    });
+
     return $app;
 ?>
