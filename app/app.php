@@ -1,10 +1,20 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__."/../src/Place.php";
 
     $app = new Silex\Application();
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
+        'twig.path' => __DIR__.'/../views'
+        ));
 
-    $app->get("/", function() {
-        return "Home";
+    $app->get("/", function() use ($app) {
+        return $app['twig']->render('home.html.twig', array(
+
+        ));
+    });
+
+    $app->post('/add_place', function() use ($app) {
+        return "Route works";
     });
 
     return $app;
