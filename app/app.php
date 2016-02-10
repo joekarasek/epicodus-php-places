@@ -12,6 +12,8 @@
         'twig.path' => __DIR__.'/../views'
         ));
 
+    // ======
+    // routes
     $app->get("/", function() use ($app) {
         return $app['twig']->render('home.html.twig', array(
             'places' => Place::getAll()
@@ -19,7 +21,6 @@
     });
 
     $app->post('/add_place', function() use ($app) {
-
         $place = new Place($_POST['city'], $_POST['country'], $_POST['year'], $_POST['image_src']);
         $place->save();
 
@@ -33,8 +34,8 @@
     });
 
     $app->post('/delete_all', function() use ($app) {
-
         Place::deleteAll();
+
         return $app['twig']->render('home.html.twig', array(
             'places' => Place::getAll(),
             'message' => array(
@@ -42,7 +43,6 @@
                 'type' => 'info'
             )
         ));
-
     });
 
     $app->post('/delete_one', function() use ($app) {
@@ -68,7 +68,6 @@
     });
 
     $app->get('/show_form', function() use ($app) {
-
         return $app['twig']->render('home.html.twig', array(
             'places' => Place::getAll(),
             'form' => true
